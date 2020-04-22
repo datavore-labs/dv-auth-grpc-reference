@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+import "google/protobuf/wrappers.proto";
+
+package com.datavorelabs.common.protos.auth;
+
+// The Auth service definition.
+service DvAuth {
+	// Resolve users given their internal ids
+	rpc resolveUsers (ResolveUsersRequest) returns (UserReply) {}
+
+	// Search for users given a query string
+	rpc searchUsers (SearchRequest) returns (UserReply) {}
+
+	// Search of groups given a query string
+	rpc searchGroups (SearchRequest) returns (SearchGroupReply) {}
+}
+
+message User {
+	string id = 1;
+	string email = 2;
+	google.protobuf.StringValue displayName = 3;
+	repeated string userGroups = 4;
+}
+
+message ResolveUsersRequest {
+	repeated string userIds = 1;
+}
+
+message SearchRequest {
+	string query = 1;
+	google.protobuf.UInt32Value limit = 2;
+	google.protobuf.UInt32Value offset = 3;
+}
+
+message UserReply {
+	repeated User users = 1;
+}
+
+message SearchGroupReply {
+	repeated string userGroups = 1;
+}
