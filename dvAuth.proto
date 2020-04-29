@@ -19,8 +19,8 @@ service DvAuth {
 message User {
 	string id = 1;
 	string email = 2;
-	google.protobuf.StringValue displayName = 3;
-	repeated string userGroups = 4;
+	google.protobuf.StringValue displayName = 3; // An optional displayName
+	repeated string userGroups = 4; // A list of groups the user belongs to
 }
 
 message ResolveUsersRequest {
